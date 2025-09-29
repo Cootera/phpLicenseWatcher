@@ -1,0 +1,177 @@
+/* Do not rely on the browser for default values */
+body {
+    color: #000000; /* black */
+    background-color: #ffffff; /* white */
+    font-size: 16px;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+#main-wrap {
+    margin-top: 50px;
+}
+
+/* Override bootstrap -- need darker color for contrast ratio */
+a {
+    color: #2f6fa7;
+}
+
+.large-text {
+    font-size: 20px;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+.center-text {
+    text-align: center;
+}
+
+/* Red (#ff0000) is too light for contrast ratio > 4.5:1 against white and #efefef. */
+.red-text {
+    color: #b22222; /* firebrick */
+}
+
+/* Green (#008000) is too light for contrast ratio < 4.5:1 against #efefef. */
+.green-text {
+    color: #006400; /* darkgreen */
+}
+
+.float-right {
+    float: right;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.block {
+    display: block;
+}
+
+/* server admin UI */
+button.servers-control-panel {
+    margin-right: 1.25rem;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+/* A button will trigger this control */
+input[type=file].servers-control-panel {
+    display: inline-block;
+    width: 1px;
+    margin: 0;
+    visibility: hidden;
+}
+/* END server admin UI */
+
+table.alt-rows-bgcolor tr:nth-child(even), .alt-bgcolor {
+    background-color: #efefef;
+}
+
+table.alt-rows-blue-bgcolor tr:nth-child(odd), .alt-odd-blue-bgcolor {
+    background-color: #f0ffff; /* azure */
+}
+
+table.alt-rows-blue-bgcolor tr:nth-child(even), .alt-even-blue-bgcolor {
+    background-color: #e1efef;
+}
+
+table.alt-rows-yellow-bgcolor tr:nth-child(odd), .alt-odd-yellow-bgcolor {
+    background-color: #fffff0; /* ivory */
+}
+
+table.alt-rows-yellow-bgcolor tr:nth-child(even), .alt-even-yellow-bgcolor {
+    background-color: #efefe1;
+}
+
+.color-guide {
+    width: 32%;
+    font-size: 20px;
+    text-align: center;
+}
+
+.color-box {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    outline-style: solid;
+    outline-color: black;
+    outline-width: 2px;
+}
+
+form.edit-form {
+    margin-left: 5%;
+    margin-right: auto;
+    width: 50%;
+}
+
+div.edit-form {
+    margin-top: 1rem;
+}
+
+input[type="text"].edit-form {
+    width: 100%;
+}
+
+input[type="checkbox"].edit-form {
+    margin-left: 1rem;
+    margin-right: 2rem;
+}
+
+button.edit-form {
+    margin-left: 1rem;
+}
+
+/* bootstrap btn class overrides */
+button.btn {
+    font-size: inherit;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 6px;
+    padding-right: 6px;
+    min-width: 32px;
+}
+
+button.btn-link {
+    color: #2f6fa7;
+}
+
+button.btn-link:hover,
+button.btn-link:focus {
+    text-decoration: none;
+}
+
+button.btn svg {
+    vertical-align: middle;
+}
+
+button.btn:hover svg,
+button.btn:focus svg {
+    fill: #23527c;
+    cursor: pointer;
+}
+
+button.btn-search {
+
+}
+
+/*
+button.btn-link-override:hover,
+button.btn-link-override:focus {
+    text-decoration: none;
+}
+*/
+
+table.events-table {
+    border: 1px solid gray;
+    padding: 1px;
+    border-spacing: 2px;
+}
+
+table#install-check {
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+}

@@ -1,0 +1,46 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+REPO_PATH      = "/home/vagrant/github_phplw"
+PROV_SCRIPT    = "vagrant_provision/pl/provision.pl"
+UPDATE_SCRIPT  = "vagrant_provision/pl/update_code.pl"
+PROV_LOG       = "logs/provision.log"
+
+Vagrant.require_version ">= 2.2.0"
+
+Vagrant.configure(2) do |config|
+    config.vagrant.plugins = "vagrant-vbguest"
+    # Vagrant box is likely to report its version of vbguest incorrectly.
+    # This will prevent unnecessary updating of vbguest and improve bootup time.
+    config.vbguest.auto_update = false
+
+    config.vm.provider "virtualbox" do |virtualbox|
+        virtualbox.cpus = 1
+        virtualbox.memory = 2048
+        # Resync the clock if it drifts by more than 10 seconds.  Useful for when host wakes up from sleep.
+        virtualbox.customize ['guestproperty', 'set', :id, '/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold', 10000]
+        # Helps work around DNS problems that may happen with large campus LANs or VPN.
+        virtualbox.customize ['modifyvm', :id, '--natdnshostresolver1', 'on']
+    end
+
+    config.vm.define "dev_box", primary: true do |phplw|
+        phplw.vm.box = "bento/ubuntu-22.04"
+        phplw.vm.network "forwarded_port", guest: 80, host: 50080
+        phplw.vm.network "forwarded_port", guest: 3306, host: 53306
+    end
+
+    config.ssh do |ssh|
+        ssh.username = "vagrant"
+        ssh.password = "vagrant"
+        ssh.insert_key = true
+    end
+
+    config.vm.synced_folder ".", REPO_PATH, create: true, owner: "vagrant", group: "vagrant", mount_options: ['dmode=775', 'fmode=664']
+    config.vm.provision "shell", inline: "perl #{REPO_PATH}/#{PROV_SCRIPT} |& tee #{REPO_PATH}/#{PROV_LOG}", privileged: true, run: "once"
+    config.vm.provision "update", type: "shell", inline: "perl #{REPO_PATH}/#{UPDATE_SCRIPT}", privileged: true, run: "never"
+    config.vm.provision "composer-install", type: "shell", inline: "perl #{REPO_PATH}/#{UPDATE_SCRIPT} composer-install-packages ", privileged: true, run: "never"
+    config.vm.provision "composer-update", type: "shell", inline: "perl #{REPO_PATH}/#{UPDATE_SCRIPT} composer-update-packages ", privileged: true, run: "never"
+    config.vm.provision "full-update", type: "shell", inline: "perl #{REPO_PATH}/#{UPDATE_SCRIPT} full ", privileged: true, run: "never"
+    config.vm.provision "delete-cache", type: "shell", inline: "rm --verbose /var/cache/phplw/*.cache", privileged: true, run: "never"
+    config.vm.provision "show-log", type: "shell", inline: "tail /opt/debug/phplw-error.log", privileged: true, run: "never"
+end

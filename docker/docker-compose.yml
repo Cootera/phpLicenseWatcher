@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+    php-httpd:
+        build:
+            context: ./httpd
+        ports:
+            - 8080:80
+        restart: on-failure:5
+    mariadb:
+        image: mariadb:10.5.5
+        volumes:
+            - mariadb-volume:/var/lib/mysql
+        environment:
+            TZ: "Europe/Rome"
+            MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+            MYSQL_ROOT_PASSWORD: ""
+            MYSQL_USER: 'lmutilmon'
+            MYSQL_PASSWORD: ''
+            MYSQL_DATABASE: 'licenses'
+        restart: on-failure:5
+
+volumes:
+    mariadb-volume:
