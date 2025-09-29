@@ -1,105 +1,216 @@
-## Overview
-The phpLicenseWatcher software is designed to monitor and manage software license servers efficiently. It provides a comprehensive overview of the health of one or more license servers, ensuring that administrators can easily check which licenses are being used and identify the current users.
-To help administrators analyze trends, the software offers charts of historical license usage, providing valuable insights into license utilization over time. This helps organizations reduce software licensing costs through better management and timely renewals.
+# phpLicenseWatcher
 
-## Key features
+A web-based tool for monitoring FlexLM and MathLM license servers. but... ☝️a little bit better modified on my opinion
 
-* Shows the health of one or more license servers
-* Checks which licenses are being used and displays who is currently using them
-* Gets a list of licenses, their expiration date and the number of days to expiration
-* E-mails alerts of licenses that will expire within certain time period ie. within next 10 days.
-* Provides charts of historical license usage
+---
 
-> [!IMPORTANT]  
-> We are soliciting feedback on what features or improvements would be of interest to users of this software.  We are particularily curious of any installation, or initial use challenges you may have faced as a primary goal is to make initial install as simple as possible.
-> Please open an issue to provide feedback.
+## Project Structure
 
-## Limitations
-
-   Currently FlexLM and MathLM (Mathematica) servers are supported.  If you are interested in support for additional vendors please open a new issue.  Software vendor must provide a linux command line tool, or API that allows querying current license usage.
-
-## Requirements
-
-* Web server capable of running PHP
-* MySQL compatible database
-* FlexLM lmutil binary for the OS you are running the web server on.
-
-## Installation process
-1. Retrieve required packages for your OS/distribution.  Any Linux distribution should work however we develop against Ubuntu.
-   * Apache2
-   * PHP 8 or higher (7.3 and up probably still work, but are not recommended)
-   * [https://getcomposer.org](Composer) for PHP package management
-   * MySQL-server, MySQL-client, PHP MySQL Extension
-   * You need the Linux Standard Base (LSB) to run Linux-precompiled FlexLM binaries.
-
-   For example, using Ubuntu 20.04:
-   ```
-   sudo apt install apache2 php mysql-server mysql-client php-mysql lsb composer
-   ```
-2. Clone repository locally using git
-   ```
-   git clone https://github.com/rpi-dotcio/phpLicenseWatcher.git /var/www/html/
-   ```
-3. Install the monitoring binaries for the vendors you wish to monitor.  Recommended location is /opt/lmtools/ . These should have come from the vendor with the software you are looking to monitor.  The FlexLM lmtuil from any of the vendors will work with others.
-
+```text
+|----tools.php
+|----lmtools_lib.php
+|----features_admin.php
+|----features_admin_db.php
+|----composer.lock
+|----usage.php
+|----servers_admin_db.php
+|----LICENSE
+|----composer.json
+|----license_cache.php
+|----footer.html
+|----docker
+| |----httpd
+| | |----php.ini
+| | |----config.php
+| | |----Dockerfile
+| | |----crontab
+| | |----entrypoint.sh
+| |----README.md
+| |----docker-compose.yml
+|----features_admin_func.php
+|----style.css
+|----servers_edit_jquery.js
+|----vagrant_provision
+| |----apache
+| | |----phplw.conf
+| |----logrotate
+| | |----phplw.conf
+| |----README.md
+| |----config
+| | |----config.php
+| |----lmtools
+| | |----readme.md
+| |----pl
+| | |----provision.pl
+| | |----update_code.pl
+| | |----config.pm
+|----.gitignore
+|----.github
+| |----ISSUE_TEMPLATE
+| | |----bug_report.md
+| | |----feature_request.md
+|----lmtools.php
+|----README.md
+|----sample-config.php
+|----graph_data.php
+|----html_table.php
+|----.git
+| |----HEAD
+| |----info
+| | |----exclude
+| |----objects
+| | |----info
+| | |----pack
+| | | |----pack-eba2ae50a42b2bd895162c819d4ad0b55d1f1698.idx
+| | | |----pack-eba2ae50a42b2bd895162c819d4ad0b55d1f1698.rev
+| | | |----pack-eba2ae50a42b2bd895162c819d4ad0b55d1f1698.pack
+| |----packed-refs
+| |----branches
+| |----config
+| |----description
+| |----hooks
+| | |----pre-rebase.sample
+| | |----fsmonitor-watchman.sample
+| | |----pre-merge-commit.sample
+| | |----push-to-checkout.sample
+| | |----pre-receive.sample
+| | |----commit-msg.sample
+| | |----prepare-commit-msg.sample
+| | |----post-update.sample
+| | |----pre-push.sample
+| | |----applypatch-msg.sample
+| | |----update.sample
+| | |----pre-applypatch.sample
+| | |----sendemail-validate.sample
+| | |----pre-commit.sample
+| |----logs
+| | |----HEAD
+| | |----refs
+| | | |----remotes
+| | | | |----origin
+| | | | | |----HEAD
+| | | |----heads
+| | | | |----master
+| |----index
+| |----refs
+| | |----tags
+| | |----remotes
+| | | |----origin
+| | | | |----HEAD
+| | |----heads
+| | | |----master
+|----index.php
+|----monitor_detail.php
+|----vagrantfile
+|----details.php
+|----servers_admin_jquery.js
+|----common.php
+|----header.html
+|----database
+| |----phplicensewatcher.sql
+| |----phplicensewatcher.maria.sql
+| |----readme.md
+| |----migrations
+| | |----readme.md
+| | |----migration-01.sql
+| | |----migration-02.sql
+| | |----migration-03.sql
+|----overview_detail.php
+|----logs
+| |----readme.txt
+|----mathematica
+| |----license_util__update_servers.template
+| |----license_cache.template
+| |----license_util__update_licenses.template
+| |----details__list_licenses_in_use.template
+| |----tools__build_license_expiration_array.template
+|----check_installation.php
+|----license_util.php
+|----servers_admin.php
+|----features_admin_jquery.js
+|----license_alert.php
 ```
-   mkdir /opt/lmtools/
 
-   #copy the FlexLM (lmutil) and/or Mathematica (monitorlm) Linux binary files to this folder.
-  
-   #Make sure they have the execute permission set
-   chmod +x /opt/lmtools/*
+---
+
+## Installation
+
+### 1) System Preparation
+
+```bash
+sudo apt install apache2 php mariadb-server mariadb-client php-mysql composer
 ```
 
-5. Create the database
-   ```
-   mysqladmin create licenses
-   mysql -f licenses < phplicensewatcher.sql
-   ```
-6. Edit "config.php" for the proper values for your setup, typically just the database username, and password.  Brief instructions are provided within the file as code comments.
+### 2) Clone the Repository
 
-7. Setup cron to run scheduled tasks
-   ```
-   0,10,20,30,40,50 * * * * php /var/www/html/license_util.php >> /dev/null
-   15 0 * * 1  php /var/www/html/license_cache.php >> /dev/null
-   0 6 * * 1 php /var/www/html/license_alert.php >> /dev/null
-   ```
-8. You should use your web server's built in capabilities to password protect your site.  See some example configurations in our [https://github.com/phpLicenseWatcher/phpLicenseWatcher/wiki/Example-Apache-Configurations](example apache configurations wiki page).
-9. Install PHP packages using composer.
+```bash
+git clone https://github.com/cootera/phpLicenseWatcher.git /var/www/html/phpLicenseWatcher
+cd /var/www/html/phpLicenseWatcher
 ```
-cd /var/html/www/
-composer install
+
+### 3) Database Setup
+
+```bash
+mariadb
 ```
-9. Navigate to page `check_installation.php` under the admin table to check for possible installation issues.
 
-### What is "LM Default Usage Reporting"?
-FlexLM documentation states that FlexLM should report license usage based on licenses checked out by users, only.
-However, our internal FlexLM systems were also including reserved (but not in use) licenses in that count.
+```sql
+CREATE DATABASE licenses CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER 'username'@'localhost' IDENTIFIED BY '***password***';
+GRANT ALL PRIVILEGES ON licenses.* TO 'username'@'localhost';
+FLUSH PRIVILEGES;
+```
 
-* When set `true`, PHP License Watcher will accept FlexLM's usage report as is.  This is the original behavior for PHP License Watcher (up to build 220503).
-* When set `false`, PHP License Watcher will do its own count of licenses in use, based on identified users of the license, and record/report that value.
-* This value is set on a per server basis.  It is found through server administration.
-* For Mathematica, this value is set `true` and should not be changed.
+```SQL
+exit
+```
 
-### Crontab details
+```bash
+mariadb -f licenses < ./database/phplicensewatcher.maria.sql
+```
 
-There are CLI scripts that need to be executed on a regular basis ie. license_util.php and license_cache.php.
+### 4) PHPMailer Installation
 
-* License_util.php is used to get current license usage. It should be run periodically throughout the day every 10 minutes.
-* License_cache.php stores the total number of available licenses on particular day. This script is necessary because you may have temporary keys that may expire on a particular day and you want to capture that. It should be run once a day preferably soon after the midnight after which license server should invalidate all the expired keys.
-* license_alert.php checks for expiring licenses and emails admins.  We run once a week.
+```bash
+composer require phpmailer/phpmailer
+```
 
+Update the notification email in `config.php`.
 
-## Example Screenshots
-![Alt text](https://github.com/rpi-dotcio/phpLicenseWatcher/raw/assets/screenshot1.png?raw=true "List of license servers")
-![Alt text](https://github.com/rpi-dotcio/phpLicenseWatcher/raw/assets/screenshot2.png?raw=true "List of features and licenses in use")
-![Alt text](https://github.com/rpi-dotcio/phpLicenseWatcher/raw/assets/screenshot3.png?raw=true "License usage statistics")
-![Alt text](https://github.com/rpi-dotcio/phpLicenseWatcher/raw/assets/screenshot4.png?raw=true "License usage statistics")
+### 5) Configure Binaries
 
+Set the path to your `lmutil` binary in `config.php & index.php` if you change it and for `monitorlm` (if available).
 
-## Warning
+```bash
+sudo chown www-data:www-data /opt/lmtools/monitorlm
+sudo chmod 755 /opt/lmtools/monitorlm
+```
 
-   There is no warranty on this package.  We wrote this system to help keep tabs on our FlexLM servers.  We are not FlexLM developers and base this system on using the publicly available commands such as lmstat, lmdiag.
-   This may not work for you.  No specific platform is targeted, but development and testing is primarily done with Ubuntu Server 20.04 LTS.
+### 6) Setup Crontab
 
-   Please do not run phplicensewatcher on a publicly available Internet server because it has not been audited to make sure it is secure.  It likely isn't. You have been warned.
+```cron
+15 * * * * php /var/www/html/license_util.php >> /dev/null
+10 * * * * php /var/www/html/license_cache.php >> /dev/null
+5 8 * * * php /var/www/html/license_alert.php >> /dev/null
+```
+
+---
+
+## Verification
+
+After completing all steps, it should look like this:
+
+![Verify.png](.attachments.127566641/Verify.png)![Sample-1.png](.attachments.127566641/Sample-1.png)
+
+![Sample-2.png](.attachments.128433314/Sample-2.png)
+
+---
+
+## Changes Made
+
+- Moved `sample-config.php` out of the `config` folder → must be renamed to `config.php`.
+- In `header.html`, added a back button on the left, centered Status/Usage, and aligned admin menu on the right.
+- Status **UP** is now displayed in green on `index.php` and `servers_admin.php`.
+- Added **Update Servers** button in `servers_admin.php` that triggers `license_util.php` once.
+- Backend in `index.php` extended: live query via `lmstat` and `monitorlm` with DB update logic (2s timeout, fallback).
+- In `details.php`, changed column name **#Cur. avail** → **Total Licenses** and removed redundant license details text.
