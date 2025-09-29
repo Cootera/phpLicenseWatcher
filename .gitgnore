@@ -1,0 +1,102 @@
+# Vagrant temp files
+/.vagrant/
+
+# NetBeans IDE
+/nbproject/
+
+# License manager binaries (should never be committed to repo!)
+/vagrant_provision/lmtools/**
+!/vagrant_provision/lmtools/readme.md
+adskflex
+lmgrd
+lmutil
+mathlm
+monitorlm
+
+# Text temp files
+**/*~
+
+# Logs
+/logs/**
+!/logs/readme.txt
+*.log
+
+# Compiled source
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Archives
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Eclipse IDE
+.classpath
+.project
+.settings
+.idea
+.metadata
+*.iml
+*.ipr
+
+# Netbeans IDE
+**/nbproject/private/
+**/nbproject/Makefile-*.mk
+**/nbproject/Package-*.bash
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# VS Code
+.code-workspace
+.vscode/
+
+# Composer
+composer
+composer.phar
+/vendor/
+!composer.lock
+!composer.json
+
+# PHP dotenv (sensitive configs)
+.env
+*.env
+config/.env
+config/.env.local
+config/.env.test
+
+# Database dumps & backups
+*.sql
+*.dump
+dump/
+backups/
+
+# Node/Frontend (falls später genutzt)
+/node_modules/
+/dist/
+/build/
+
+# Sessions / Cache
+/tmp/
+*.session
+*.cache
