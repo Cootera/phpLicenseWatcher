@@ -201,8 +201,8 @@ sudo chmod 755 /opt/lmtools/monitorlm
 After completing all steps, it should look like this:
 
 <img width="1900" height="739" alt="Verify" src="https://github.com/user-attachments/assets/936c3c7d-0e76-44e2-8278-4a5fe2abd552" />
-<img width="1915" height="1048" alt="Sample-2" src="https://github.com/user-attachments/assets/1f15393e-c524-4410-893a-93002f25dd31" />
-<img width="1916" height="777" alt="Sample-1" src="https://github.com/user-attachments/assets/e25613b6-06d7-49d1-8ead-ddbe17bba8db" />
+<img width="1916" height="777" alt="Sample-1" src="https://github.com/user-attachments/assets/0c24e985-eac0-4311-9cf6-bcb2ff76e498" />
+<img width="1915" height="1048" alt="Sample-2" src="https://github.com/user-attachments/assets/2678775c-32f5-4eac-9b4f-56c406f99d70" />
 
 ---
 
