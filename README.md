@@ -197,6 +197,13 @@ crontab -e
 5 8 * * * php /var/www/html/license_alert.php >> /dev/null
 ```
 
+### 7) Last Steps
+
+Configure the sample-config.php file. Rename it to config.php and change the following contents:
+- Path to lmutil and/or monitorlm
+- notify_address
+- db_username and db_password
+
 ---
 
 ## Verification
