@@ -156,7 +156,7 @@ mariadb
 
 ```sql
 CREATE DATABASE licenses CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER 'username'@'localhost' IDENTIFIED BY '***password***';
+CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON licenses.* TO 'username'@'localhost';
 FLUSH PRIVILEGES;
 ```
