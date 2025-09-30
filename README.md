@@ -216,4 +216,4 @@ After completing all steps, it should look like this:
 - In `details.php`, changed column name **#Cur. avail** → **Total Licenses** and removed redundant license details text.
 
 
-# You can find the owner of phpLicenseWatcher at the following link: https://github.com/phpLicenseWatcher/phpLicenseWatcher 
+# You can find the owner of this project at the following link: https://github.com/phpLicenseWatcher/phpLicenseWatcher 
