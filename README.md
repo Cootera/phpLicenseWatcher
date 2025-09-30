@@ -182,6 +182,7 @@ Update the notification email in `config.php`.
 Set the path to your `lmutil` binary in `config.php & index.php` if you change it and for `monitorlm` (if available).
 
 ```bash
+sudo chmod 755 /opt/lmtools/lmutil
 sudo chown www-data:www-data /opt/lmtools/monitorlm
 sudo chmod 755 /opt/lmtools/monitorlm
 ```
