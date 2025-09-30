@@ -9,6 +9,7 @@ A web-based tool for monitoring FlexLM and MathLM license servers. but... ☝️
 
 - Tested with Apache2
 - Tested with PHP version 8.4
+- Tested with phpmailer version 6.11
 - Tested with Debian 12 & 13 operating systems
 - Tested with functional lmutil and monitorlm (binaries are only executable in Linux Standard Base)
 
