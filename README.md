@@ -200,7 +200,7 @@ crontab -e
 ### 7) Last Steps
 
 Configure the sample-config.php file. Rename it to config.php and change the following contents:
-- Path to lmutil and/or monitorlm
+- Path to lmutil and/or monitorlm, if this is not /opt/lmtools, change the path to the binary files in the index.php file in lines 14 and 71
 - notify_address
 - db_username and db_password
 
