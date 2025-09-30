@@ -188,6 +188,9 @@ sudo chmod 755 /opt/lmtools/monitorlm
 
 ### 6) Setup Crontab
 
+```bash
+crontab -e
+```
 ```cron
 15 * * * * php /var/www/html/license_util.php >> /dev/null
 10 * * * * php /var/www/html/license_cache.php >> /dev/null
