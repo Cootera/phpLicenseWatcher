@@ -9,7 +9,7 @@
 
 # Path to lmutil & monitorlm File - Recommended to move to/opt/lmtools because of the index.php
 $monitorlm_binary = '/Path/to/monitorlm'; # monitorlm Binary
-$lm_home = "/Path/to/lmutil-Path"; # lmutil Binary Path
+$lm_home = "/Path/to/lmutil-Path"; # lmutil Binary Path not the File
 
 # If $lm_home has lmstat and lmutil, do not change these 3  lines
 $lmutil_loc = $lm_home . "/lmutil";
