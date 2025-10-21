@@ -155,6 +155,11 @@ A web-based tool for monitoring FlexLM and MathLM license servers. but... ☝️
 sudo apt install apache2 php mariadb-server mariadb-client php-mysql composer
 ```
 
+Secure-installation (optional)
+```bash
+sudo mariadb-secure-installation
+```
+
 ### 2) Clone the Repository
 
 ```bash
@@ -217,6 +222,7 @@ crontab -e
 Configure the sample-config.php file. Rename it to config.php and change the following contents:
 - Path to lmutil and/or monitorlm, if this is not /opt/lmtools, change the path to the binary files in the index.php file in lines 14 and 71
 - notify_address
+- smtp_host, smtp_login, smtp_password, smtp_tls, smtp_port, reply_address, lead_time, smtp_debug
 - db_username and db_password
 
 ---
