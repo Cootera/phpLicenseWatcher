@@ -48,9 +48,20 @@ $disable_license_removal = 0;
 $debug = 1;
 
 ################################################################
-# NOTIFICATION-EMAIL
+# NOTIFICATION-EMAIL & REPLY EMAIL
 ################################################################
 $notify_address = "test@domain.com";
+// $reply_address = "";
+
+################################################################
+# SMTP CONFIGURATIONS
+################################################################
+// $smtp_host = "";
+// $smtp_login = "";
+// $smtp_password = "";
+// $smtp_tls = "";
+// $smtp_port = "";
+// smtp_debug = "";
 
 ################################################################
 # DATA COLLECTION INTERVAL (minutes)
