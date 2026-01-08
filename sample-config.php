@@ -50,6 +50,7 @@ $debug = 1;
 ################################################################
 # NOTIFICATION-EMAIL & REPLY EMAIL
 ################################################################
+$send_email_notifications = 1;
 $notify_address = "test@domain.com";
 // $reply_address = "";
 
